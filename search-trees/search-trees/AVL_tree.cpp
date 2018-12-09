@@ -14,21 +14,21 @@ AVL_tree::~AVL_tree()
 		tree_delete(root);
 }
 
-Node* AVL_tree::insert_node(Node *n, int key, int value)
+Node* AVL_tree::insert_node(Node *n, int key)
 {
 	if (n == NULL)
 	{
-		n = new Node(key, value);
+		n = new Node(key);
 		return rebalance(n);
 	}
 	if (n->key > key)
 	{
-		n->left = insert_node(n->left, key, value);
+		n->left = insert_node(n->left, key);
 		return rebalance(n);
 	}
 	else
 	{
-		n->right = insert_node(n->right, key, value);
+		n->right = insert_node(n->right, key);
 		return rebalance(n);
 	}
 
@@ -96,7 +96,6 @@ Node* AVL_tree::remove_min(Node* n, Node* iter)
 
 		Node* r = iter->right;
 		n->key = iter->key;
-		n->value = iter->value;
 		delete iter;
 		iter = r;
 	}

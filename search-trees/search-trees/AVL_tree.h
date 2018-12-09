@@ -8,19 +8,18 @@ using namespace std;
 struct Node
 {
 	int key;
-	int value;
 	Node *right;
 	Node *left;
 	int height;
 
-	Node(int key, int val) : key(key), value(val), left(NULL), right(NULL), height(1) {};
+	Node(int key) : key(key), left(NULL), right(NULL), height(1) {};
 };
 
 class AVL_tree
 {
 private:
 	Node *root;
-	Node* insert_node(Node *n, int key, int value);
+	Node* insert_node(Node *n, int key);
 	Node* search(Node* n, int key);
 	Node * turn_left(Node * n);
 	Node * turn_right(Node * n);
@@ -40,18 +39,18 @@ public:
 	{
 		Node* n = search(root, key);
 		if (n)
-			return n->value;
+			return n->key;
 		else
 			return 0;
 	}
-	void add(int key, int value) 
+	void add(int key) 
 	{ 
 		if (search(root, key))
 		{
 			cout << "repeat" << endl;
 			return;
 		}
-		root = insert_node(root, key, value);
+		root = insert_node(root, key);
 	}
 
 	void del(int key) { root = remove(root, key); }
