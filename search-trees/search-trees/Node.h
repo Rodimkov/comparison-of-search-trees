@@ -1,5 +1,7 @@
 #pragma once
 class Node_splay {
+
+public:
 	Node_splay *parent;
 	Node_splay *right_child;
 	Node_splay *left_child;

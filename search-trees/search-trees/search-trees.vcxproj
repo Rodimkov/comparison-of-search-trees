@@ -149,12 +149,14 @@
     <ClInclude Include="AVL_tree.h" />
     <ClInclude Include="Node.h" />
     <ClInclude Include="SplayTree.h" />
+    <ClInclude Include="treap.h" />
     <ClInclude Include="Tree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AVL_tree.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="SplayTree.cpp" />
+    <ClCompile Include="treap.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
