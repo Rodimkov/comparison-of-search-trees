@@ -16,60 +16,66 @@ AVL_tree::~AVL_tree()
 
 Node* AVL_tree::insert_node(Node *n, int key)
 {
+	Node* res = nullptr;
 	if (n == NULL)
 	{
 		n = new Node(key);
-		return rebalance(n);
+		res = rebalance(n);
+		return res;
 	}
 	if (n->key > key)
 	{
 		n->left = insert_node(n->left, key);
-		return rebalance(n);
+		res = rebalance(n);
+		return res;
 	}
 	if (n->key < key)
 	{
 		n->right = insert_node(n->right, key);
-		return rebalance(n);
+		res = rebalance(n);
+		return res;
 	}
+
+	//return res;
 
 }
 
 Node * AVL_tree::search(Node *n, int key)
 {
 	/*if (node == nullptr) {
-		return node;
+	return node;
 	}
 
 	if (node->key == key) {
-		return node;
+	return node;
 	}
 	Node * res = nullptr;
 	if (node->key > key) {
-		if (node->left == nullptr)
-			return node;
-		if ((node->left)->key > key) {
-			res = search(node->left->left, key);
-		}
-		else {
-			if ((node->left)->key < key) {
-				res = search(node->left->right, key);
-			}
-		}
-		return (res == nullptr) ? node->left : res;
+	if (node->left == nullptr)
+	return node;
+	if ((node->left)->key > key) {
+	res = search(node->left->left, key);
+	}
+	else {
+	if ((node->left)->key < key) {
+	res = search(node->left->right, key);
+	}
+	}
+	return (res == nullptr) ? node->left : res;
 
 	}
 	else {
-		if (node->right == nullptr)
-			return node;
-		if ((node->right)->key > key) {
-			res = search(node->right->left, key);
-		}
-		else {
-			if ((node->right)->key < key) {
-				res = search(node->right->right, key);
-			}
-		}
-		return (res == nullptr) ? node->right : res;
+	if (node->right == nullptr)
+	return node;
+	if ((node->right)->key > key) {
+	res = search(node->right->left, key);
+	}
+	else {
+	if ((node->right)->key < key) {
+	res = search(node->right->right, key);
+	}
+	}
+	return (res == nullptr) ? node->right : res;
 	}*/
 
 
@@ -77,13 +83,17 @@ Node * AVL_tree::search(Node *n, int key)
 		return NULL;
 	if (n->key == key)
 		return n;
-	else if (n->key < key)
-		
-		n = search(n->right, key);
-	else if (n->key > key)
-		n = search(n->left, key);
+	else {
+		if (n->key < key)
+
+			n = search(n->right, key);
+		else {
+			if (n->key > key)
+				n = search(n->left, key);
+		}
+	}
 	/*else
-		return n;//не окажемся*/
+	return n;//не окажемся*/
 }
 
 Node* AVL_tree::turn_left(Node* n)

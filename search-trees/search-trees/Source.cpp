@@ -2,168 +2,174 @@
 #include "AVL_Tree.h"
 #include <time.h>
 #include <iostream>
-#include <map>
-#include <string>
+#include <set>
 #include <chrono>
-#define SIZE 1000000
-const int good = 100;
+#include <vector>
+#include <map>
+const int temp = 500;
+const int ins = 1000 * 5 * 5 * 5 * 5 * 5;
+//const int ins = 100000;
 using namespace std;
 
 void main() {
 	srand(100);
-	Node_splay* n = new Node_splay(0);
+	/*Node_splay* n = new Node_splay(-1);
 	SplayTree* sp = new SplayTree(n);
+	set<int> set;
+	map<int, int> map;
+	int *test = new int[ins];
+	int *test_t = new int[temp];
+	vector<int> v(ins + temp);
 	AVL_tree tr;
-	//auto begin, end;
-	int *test = new int[SIZE];
-	int *test_t = new int[good];
+	vector<pair<int, int>> revenue(ins);
+	vector<pair<int, int>> revenue_t(temp);
+	/*cout << "AVL" << endl << endl;
 
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < temp; i++)
 	{
-		test[i] =  rand();
+		test_t[i] = 31 + rand() << 15 + rand();
 	}
 
-	for (int i = 0; i < good; i++)
+	for (int i = 0; i < ins; i++)
 	{
-		test_t[i] = test[rand() % SIZE];
-		//cout << test_t[i] << endl;
+		test[i] = 31 + rand() << 15 + rand();
 	}
-	auto begin = chrono::high_resolution_clock::now();
+	for (int i = 0; i < temp; i++)
+	{
+		revenue_t[i] = { 31 + rand() << 15 + rand(), 31 + rand() << 15 + rand() };
+	}
+	for (int i = 0; i < ins; i++)
+	{
 
-	for (int i = 0; i < SIZE; i++)
+		revenue[i] = { 31 + rand() << 15 + rand(), 31 + rand() << 15 + rand() };
+	}
+
+
+	for (int i = 0; i < ins; i++)
 	{
 		tr.add(test[i]);
+	}
+	for (int i = 0; i < ins; i++)
+	{
+		sp->Insert(test[i]);
+	}
+	for (int i = 0; i < ins; i++)
+	{
+		map.insert(revenue[i]);
+	}
+
+	cout << "AVL" << endl << endl;
+	auto begin = chrono::high_resolution_clock::now();
+	for (int i = 0; i < temp; i++)
+	{
+		tr.add(test_t[i]);
 	}
 	auto end = chrono::high_resolution_clock::now();
-	cout << "time add = " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << endl;
-	int k = 0;
+	//cout << "time add = " << chrono::duration_cast<chrono::microseconds>(end - begin).count() << endl;
+
+	cout << "splay" << endl << endl;
 	begin = chrono::high_resolution_clock::now();
-	/*for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < temp; i++)
 	{
-		tr.find(test_t[i%good]);
-	}*/
-	for (int i = 0; i < SIZE; i++)
-	{
-		tr.find(test_t[i%good]);
-		tr.find(test_t[i%good]);
-		tr.find(test_t[i%good]);
-		tr.find(test_t[i%good]);
-		tr.find(test_t[i%good]);
-
-
-		//tr.find(test[i]);
+		sp->Insert(test_t[i]);
 	}
 	end = chrono::high_resolution_clock::now();
-	cout << "time find = " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << endl;
+	//cout << "time add = " << chrono::duration_cast<chrono::microseconds>(end - begin).count() << endl;
 
+	cout << "map" << endl << endl;
 	begin = chrono::high_resolution_clock::now();
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < temp; i++)
 	{
-		tr.del(test[i]);
+		map.insert(revenue_t[i]);
 	}
 	end = chrono::high_resolution_clock::now();
-	cout << "time del = " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << endl;
+	//cout << "time add = " << chrono::duration_cast<chrono::microseconds>(end - begin).count() << endl;
 
-	system("pause");
-
+	int t = 0;
 	begin = chrono::high_resolution_clock::now();
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < temp; i++)
 	{
-		sp->Insert(test[i]);
+		t = tr.find(test_t[i]);
 	}
 	end = chrono::high_resolution_clock::now();
-	cout << "time add = " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << endl;
+	cout << "time find = " << chrono::duration_cast<chrono::microseconds>(end - begin).count() << endl;
+	if (t == 0)
+	{
+		cout << endl;
+	}
 
 	begin = chrono::high_resolution_clock::now();
-	/*for (int i = 0; i < SIZE; i++)
+	t = 0;
+	for (int i = 0; i < temp; i++)
 	{
-		sp->Find(test_t[i%good]);
-	}*/
-	for (int i = 0; i < SIZE; i++)
-	{
-		sp->Find(test_t[i%good]);
-		sp->Find(test_t[i%good]);
-		sp->Find(test_t[i%good]);
-		sp->Find(test_t[i%good]);
-		sp->Find(test_t[i%good]);
-
-
-		//sp->Find(test[i]);
+		t = sp->Find(test_t[i]);
 	}
 	end = chrono::high_resolution_clock::now();
-	cout << "time find = " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << endl;
+	cout << "time find = " << chrono::duration_cast<chrono::microseconds>(end - begin).count() << endl;
+	if (t == 0)
+	{
+		cout << endl;
+	}
+
 
 	begin = chrono::high_resolution_clock::now();
-	for (int i = 0; i < SIZE; i++)
+	t = 0;
+	for (int i = 0; i < temp; i++)
 	{
-		sp->Remove(test[i]);
+		map.find(revenue_t[i].first);
 	}
 	end = chrono::high_resolution_clock::now();
-	cout << "time del = " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << endl;
-	//-------------------------------------------------------------------------------------------------//
-	cout << endl << endl;
-	system("pause");
+	cout << "time find = " << chrono::duration_cast<chrono::microseconds>(end - begin).count() << endl;
+
 
 	/*begin = chrono::high_resolution_clock::now();
-
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < temp; i++)
 	{
-		tr.add(test[i]);
+		tr.del(test_t[i]);
 	}
 	end = chrono::high_resolution_clock::now();
-	cout << "time add = " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << endl;
+	cout << "time del = " << chrono::duration_cast<chrono::microseconds>(end - begin).count() << endl;
 
 	begin = chrono::high_resolution_clock::now();
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < temp; i++)
 	{
-		tr.find(test[i]);
+		sp->Remove(test_t[i]);
 	}
 	end = chrono::high_resolution_clock::now();
-	cout << "time find = " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << endl;
-
+	cout << "time del = " << chrono::duration_cast<chrono::microseconds>(end - begin).count() << endl;
 
 	begin = chrono::high_resolution_clock::now();
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < temp; i++)
 	{
-		tr.del(test[i]);
+		map.erase(revenue_t[i].first);
 	}
 	end = chrono::high_resolution_clock::now();
-	cout << "time del = " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << endl;
+	cout << "time del = " << chrono::duration_cast<chrono::microseconds>(end - begin).count() << endl;
+	*/
+	vector<int> test(temp);
+	vector<int> mas(ins);
 
-	system("pause");
-	cout << endl << endl;
-	system("pause");
-
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < temp; i++)
 	{
-		sp->Insert(test[i]);
+		test[i] = 31 + rand() << 15 + rand();
 	}
-
-	for (int i = 0; i < SIZE; i++)
+	for (int i = 0; i < ins; i++)
 	{
-		tr.add(test[i]);
+		mas[i] = 31 + rand() << 15 + rand();
 	}
-
-	begin = chrono::high_resolution_clock::now();
-	for (int i = 0; i < SIZE; i++)
+	std::sort(mas.begin(), mas.end());
+	int t = 0;
+	auto begin = chrono::high_resolution_clock::now();
+	for (int i = 0; i < temp; i++)
 	{
-		sp->Find(test[150]);
-		sp->Find(test[160]);
-
+		t = std::binary_search(mas.begin(), mas.end(), test[i]);
 	}
-	end = chrono::high_resolution_clock::now();
-	cout << "time find = " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << endl;
-
-
-	begin = chrono::high_resolution_clock::now();
-	for (int i = 0; i < SIZE; i++)
+	auto end = chrono::high_resolution_clock::now();
+	cout << "time find = " << chrono::duration_cast<chrono::microseconds>(end - begin).count() << endl;
+	if (t == 0)
 	{
-		tr.find(test[150]);
-		tr.find(test[160]);
-
+		cout << endl;
 	}
-	end = chrono::high_resolution_clock::now();
-	cout << "time find = " << chrono::duration_cast<chrono::milliseconds>(end - begin).count() << endl;*/
 	system("pause");
 
 	return;

@@ -109,7 +109,7 @@ void SplayTree::Splay(Node_splay* u) {
 	}
 	else {
 		if (grandparent->right_child == parent) {
-			if (parent->right_child== u) {
+			if (parent->right_child == u) {
 				ZagZag(u);
 			}
 			else {
@@ -126,17 +126,15 @@ void SplayTree::Splay(Node_splay* u) {
 			}
 		}
 	}
+
 	Splay(u);
 }
 
 Node_splay* SplayTree::find_node(Node_splay* node, int key) {
-	if (node == nullptr) {
+	if (node == nullptr || node->key == key) {
 		return node;
 	}
 
-	if (node->key == key) {
-		return node;
-	}
 	Node_splay* res = nullptr;
 	if (node->key > key) {
 		if (node->left_child == nullptr)
@@ -167,24 +165,24 @@ Node_splay* SplayTree::find_node(Node_splay* node, int key) {
 	}
 
 	/*if (node == nullptr)
-		return node;
+	return node;
 
 	if (node->key == key)
-		return node;
+	return node;
 
 	else if (node->key < key)
 	{
-		if (node->right_child == nullptr)
-			return node;
+	if (node->right_child == nullptr)
+	return node;
 
-		node = find_node(node->right_child, key);
+	node = find_node(node->right_child, key);
 	}
 	else if ((node->key > key))
 	{
-		if (node->left_child == nullptr)
-			return node;
+	if (node->left_child == nullptr)
+	return node;
 
-		node = find_node(node->left_child, key);
+	node = find_node(node->left_child, key);
 	}*/
 }
 
@@ -195,7 +193,7 @@ int SplayTree::Find(int key) {
 }
 
 SplayTree SplayTree::Split(int k) {
-	Node_splay* res = find_node(root,k);
+	Node_splay* res = find_node(root, k);
 	Node_splay* right = res->right_child;
 	if (right != nullptr)
 		right->parent = nullptr;
@@ -232,7 +230,7 @@ void SplayTree::Remove(int k) {
 	if (curr->existLeft() && curr->existRight()) {
 		left->parent = nullptr;
 		if (right != nullptr)
-			right->parent =  nullptr;
+			right->parent = nullptr;
 		root = left;
 		Merge(SplayTree(right));
 	}

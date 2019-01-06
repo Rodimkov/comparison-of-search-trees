@@ -30,21 +30,22 @@ private:
 	Node * remove_min(Node * n, Node * iter);
 	Node * remove(Node * n, int key);
 	void tree_delete(Node* n);
-	int height(const Node* n) 
-	{ 
-		if (n!= NULL)
+	int height(const Node* n)
+	{
+		if (n != NULL)
 			return n->height;
 		else
 			0;
-		/*return n ? n->height : 0; */}
-	int balance(const Node* n) 
-	{ 
-		if(n!= NULL && n->left != NULL && n->right != NULL)
-			return height(n->right) - height(n->left); 
+		/*return n ? n->height : 0; */
+	}
+	int balance(const Node* n)
+	{
+		if (n != NULL && n->left != NULL && n->right != NULL)
+			return height(n->right) - height(n->left);
 		else return 0;
 	}
-	void reheight(Node* n) 
-	{ 
+	void reheight(Node* n)
+	{
 		if (n != NULL && n->left != NULL && n->right != NULL)
 
 		{
@@ -65,7 +66,7 @@ public:
 	{
 		//auto begin = chrono::high_resolution_clock::now();
 		Node* n = nullptr;
-		n =	search(root, key);
+		n = search(root, key);
 		//auto end = chrono::high_resolution_clock::now();
 		//cout << "     time find = " << chrono::duration_cast<chrono::nanoseconds>(end - begin).count() << endl;
 		if (n->key == key)
@@ -73,8 +74,8 @@ public:
 		else
 			return NULL;
 	}
-	void add(int key) 
-	{ 
+	void add(int key)
+	{
 		if (search(root, key))
 		{
 			//cout << "repeat" << endl;
